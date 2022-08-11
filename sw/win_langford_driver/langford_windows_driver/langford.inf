@@ -1,0 +1,93 @@
+;
+; langford.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=SoftwareDefinedRadio
+ClassGuid={081E11D5-2BD0-4340-BD21-C4C9FD9FBFDC}
+Provider=%Pv%
+CatalogFile=langford.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+langford.sys  = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%langford.DeviceDesc%=langford_Device, PCI\VEN_1172&DEV_0004&SUBSYS_00041172&REV_01 ; Root\langford  TODO: edit hw-id
+
+[langford_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+langford.sys
+
+;-------------- Service installation
+[langford_Device.NT.Services]
+AddService = langford,%SPSVCINST_ASSOCSERVICE%, langford_Service_Inst
+
+; -------------- langford driver install sections
+[langford_Service_Inst]
+DisplayName    = %langford.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\langford.sys
+LoadOrderGroup = Extended Base
+
+;
+;--- langford_Device Coinstaller installation ------
+;
+
+[DestinationDirs]
+langford_Device_CoInstaller_CopyFiles = 11
+
+[langford_Device.NT.CoInstallers]
+AddReg=langford_Device_CoInstaller_AddReg
+CopyFiles=langford_Device_CoInstaller_CopyFiles
+
+[langford_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[langford_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[SourceDisksFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+[langford_Device.NT.Wdf]
+KmdfService =  langford, langford_wdfsect
+[langford_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="Per Vices Corporation"
+Pv="Per Vices Corporation"
+langford.DeviceDesc="Per Vices Corporation Phi"
+ClassName="Software Defined Radio"
+DiskName = "langford Installation Disk"
+langford.DeviceDesc = "langford Device"
+langford.SVCDESC = "langford Service"

@@ -1,0 +1,10 @@
+sw - Software and drivers
+
+dsp
+DSP programs, including decimator and downconverter.
+
+langford_driver
+Linux kernel module for the langford device
+
+libs
+Various libraries and their test benches

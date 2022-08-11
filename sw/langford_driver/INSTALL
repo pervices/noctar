@@ -1,0 +1,18 @@
+To install the langford driver, run, as root, the following commands;
+
+--
+
+make
+make install
+
+--
+
+Once installed, you need to initialize the driver. To do so, run;
+
+--
+
+langford_init
+
+--
+
+This creates the /dev/langford device that corresponds to your device.

@@ -1,0 +1,55 @@
+TP3 Initialization
+
+adf4351_regs_t(){
+	//Values Selected for TP3
+        foo.frac_12_bit = 0;
+        foo.int_16_bit = 23;
+        foo.mod_12_bit = 2;
+        foo.phase_12_bit = 1;
+        foo.prescaler = PRESCALER_4_5;
+	foo.phase_adj = PHASE_ADJ_OFF;
+        foo.counter_reset = COUNTER_RESET_DISABLED;
+        foo.cp_three_state = CP_THREE_STATE_DISABLED;
+        foo.power_down = POWER_DOWN_ENABLED;
+        foo.pd_polarity = PD_POLARITY_POSITIVE;
+        foo.ldp = LDP_10NS;
+        foo.ldf = LDF_FRAC_N;
+        foo.charge_pump_current = CHARGE_PUMP_CURRENT_1_88MA;
+        foo.double_buffer = DOUBLE_BUFFER_DISABLED;
+        foo.r_counter_10_bit = 0;
+        foo.reference_divide_by_2 = REFERENCE_DIVIDE_BY_2_ENABLED;
+        foo.reference_doubler = REFERENCE_DOUBLER_DISABLED;
+        foo.muxout = MUXOUT_DVDD;
+        foo.low_noise_and_spur = LOW_NOISE_AND_SPUR_LOW_SPUR;
+        foo.clock_divider_12_bit = 0;
+        foo.clock_div_mode = CLOCK_DIV_MODE_CLOCK_DIVIDER_OFF;
+        foo.cycle_slip_reduction = CYCLE_SLIP_REDUCTION_DISABLED;
+	foo.charge_cancel = CHARGE_CANCEL_DISABLED;
+	foo.antibacklash_pulse = ANTIBACKLASH_PULSE_6NS;
+	foo.band_sel_clk_mode = BAND_SEL_CLK_MODE_LOW;
+        foo.output_power = OUTPUT_POWER_M4DBM;
+        foo.rf_output_enable = RF_OUTPUT_ENABLE_DISABLED;
+        foo.aux_output_power = AUX_OUTPUT_POWER_M4DBM;
+        foo.aux_output_enable = AUX_OUTPUT_ENABLE_DISABLED;
+        foo.aux_output_select = AUX_OUTPUT_SELECT_FUNDAMENTAL;
+        foo.mute_till_lock_detect = MUTE_TILL_LOCK_DETECT_MUTE_DISABLED;
+        foo.vco_power_down = VCO_POWER_DOWN_VCO_POWERED_UP;
+        foo.band_seletc_clock_div = 250;
+        foo.rf_divider_select = RF_DIVIDER_SELECT_DIV1;
+        foo.feedback_select = FEEDBACK_SELECT_FUNDAMENTAL;
+        foo.ld_pin_mode = LD_PIN_MODE_DLD;
+    }
+
+//RF_DIVIDER_SELECT_DIVX
+
+
+Advanced Design - VCO Divider is Outside loop and set as follows: 
+Start Freq	Stop Freq	VCO Divider	Channel Spacing 
+50.0MHz	68.75MHz	64	781.25 Hz 
+68.75MHz	137.5MHz	32	1.5625kHz 
+137.5MHz	 275MHz	16	3.125kHz 
+ 275MHz	 550MHz	8	6.25kHz 
+ 550MHz	1.10GHz	4	12.5kHz 
+1.10GHz	2.20GHz	2	25.0kHz 
+2.20GHz	4.00GHz	1	50.0kHz 
+

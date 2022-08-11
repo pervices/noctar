@@ -1,0 +1,17 @@
+Systemd service file.
+
+This directory contains langford.service, a systemd unit file. On systems running
+systemd, this should be placed in the systemd directory. On Arch Linux machines,
+this directory is found here;
+
+/usr/lib/systemd/system/
+
+After being copied to this directory, you'll be able to automatically launch the 
+service at boot, by enabling it using the systemctl interface;
+
+systemctl enable langford.service
+
+If this is your first time running it, you may also want to start it with;
+
+systemctl start langford.service
+

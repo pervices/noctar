@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#***********************************************************************
+# * The langford initialization file. This utility initializes the
+# * /dev/langford file based on the /proc/device list.
+# * 
+# * (c) 2013 Per Vices Corporation
+# * 
+# * See LICENSE.txt for license and copyright information.
+# ************************************************************************/
+
+#Load registered char device to /dev/langford
+#This will only work after compiling correct kernel driver.
+
+#Check for root permissions - required to create char device.
+if [[ $EUID -ne 0 ]]; then
+   echo "Langford device initialization requires superuser permissions. Please run as root, or try typing: sudo langford_init" 1>&2
+   exit 1
+fi
+
+
+if [ -e /dev/langford ]; then
+	echo "/dev/langford already exists - exiting."
+	exit 1
+else
+	mknod /dev/langford c $(awk '/langford/ {print $1}' /proc/devices) 0
+	if [ -e /dev/langford ]
+	then
+		# echo "New Langford Device Created at /dev/langford"
+		chown root:langford /dev/langford
+		chmod g+u /dev/langford
+		# echo "Granting read/write permissions to members of the langford group."
+		exit 0
+	else
+		echo "Failed to create Langford device.  Is the kernel module loaded?"
+		exit 1
+	fi
+fi
+

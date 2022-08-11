@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1376261158 source:/home/altrus/src/pv/langford/sw/dsp/langford_dsp/main.cpp
+	"main.h"
+
+1369436891 /home/altrus/src/pv/langford/sw/dsp/langford_dsp/main.h
+	<cerrno>
+	<cmath>
+	<cstdio>
+	<cstdlib>
+	<iostream>
+	<string>
+
